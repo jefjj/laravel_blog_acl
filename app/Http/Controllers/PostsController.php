@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-//use Illuminate\Routing\Redirector;
 use App\Post;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
@@ -17,15 +16,26 @@ class PostsController extends Controller
         ]);
     }
 
-    public function post($id)
+    public function newPost()
     {
-        $post = $id > 0 ? POST::where(['id' => $id])->first() : $post = new POST;
+        $post = new POST;
+        $this->authorize('create', $post);
+
+        return view('posts/form')->with('post', $post);
+    }
+
+    public function updatePost($id)
+    {
+        $post = POST::where(['id' => $id])->first();
+        $this->authorize('update', $post);
+
         return view('posts/form')->with('post', $post);
     }
 
     public function deletePost($id)
     {
         $post = POST::where(['id' => $id])->first();
+        $this->authorize('delete', $post);
         $post->delete();
 
         return redirect()->route('posts');
@@ -33,10 +43,15 @@ class PostsController extends Controller
 
     public function savePost(Request $request)
     {
-        $post = $request->input('id') > 0 ? POST::where(['id' => $request->input('id')])->first() : new POST;
+        $id = $request->input('id') === null ? 0 : $request->input('id');
+        $post = $id === 0 ? new POST : POST::where(['id' => $request->input('id')])->first();
+
         $post->title = $request->input('title');
         $post->content = $request->input('content');
-        $post->user_id = Auth::user()->id;
+
+        if($id === 0)
+            $post->user_id = Auth::user()->id;
+
         $post->save();
 
         return redirect()->route('posts');
