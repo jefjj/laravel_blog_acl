@@ -14,7 +14,7 @@
                             <input id="title" name="title" type="text" class="form-control" value="{{ $post->title }}">
                         </div>
                         <div class="form-group">
-                            <label for="content">Texto</label>
+                            <label for="content">Conteúdo</label>
                             <textarea id="content" name="content" class="form-control"
                                       rows="5">{{ $post->content }}</textarea>
                         </div>
@@ -29,6 +29,15 @@
                         </div>
                     </fieldset>
                 </form>
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

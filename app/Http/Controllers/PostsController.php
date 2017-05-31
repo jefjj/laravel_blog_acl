@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBlogPost;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,7 @@ class PostsController extends Controller
 
     public function newPost()
     {
-        $post = new POST;
+        $post = new Post;
         $this->authorize('create', $post);
 
         return view('posts/form')->with('post', $post);
@@ -26,7 +27,7 @@ class PostsController extends Controller
 
     public function updatePost($id)
     {
-        $post = POST::where(['id' => $id])->first();
+        $post = Post::find($id);
         $this->authorize('update', $post);
 
         return view('posts/form')->with('post', $post);
@@ -34,23 +35,29 @@ class PostsController extends Controller
 
     public function deletePost($id)
     {
-        $post = POST::where(['id' => $id])->first();
+        $post = Post::find($id);
         $this->authorize('delete', $post);
         $post->delete();
 
         return redirect()->route('posts');
     }
 
-    public function savePost(Request $request)
+    public function savePost(StoreBlogPost $request)
     {
-        $id = $request->input('id') === null ? 0 : $request->input('id');
-        $post = $id === 0 ? new POST : POST::where(['id' => $request->input('id')])->first();
+        $id = is_null($request->input('id')) ? 0 : $request->input('id');
+
+        if($id === 0)
+        {
+            $post = new Post;
+            $post->user_id = Auth::user()->id;
+        }
+        else
+        {
+            $post = POST::find($id);
+        }
 
         $post->title = $request->input('title');
         $post->content = $request->input('content');
-
-        if($id === 0)
-            $post->user_id = Auth::user()->id;
 
         $post->save();
 
