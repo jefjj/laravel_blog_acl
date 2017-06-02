@@ -31,15 +31,17 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'Blog do Post') }}
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    &nbsp;<li><a href="{{ route('home') }}">Home</a></li>
-                    &nbsp;<li><a href="{{ route('posts') }}">Posts</a></li>
+                    <li><a href="{{ route('posts') }}">Posts</a></li>
+                    <li><a href="{{ route('users') }}">Usuários</a></li>
+                    <li><a href="{{ route('roles') }}">Papéis</a></li>
+                    <li><a href="{{ route('permissions') }}">Permissões</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -47,7 +49,7 @@
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="{{ route('login') }}">Login</a></li>
-                        <li><a href="{{ route('register') }}">Register</a></li>
+                        <li><a href="{{ route('register') }}">Cadastro</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -81,5 +83,13 @@
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.list-my-posts').click(function (e) {
+            e.preventDefault();
+            $('#postsById').submit();
+        });
+    });
+</script>
 </body>
 </html>

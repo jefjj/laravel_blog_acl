@@ -14,3 +14,26 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5{
 label{
   font-weight: normal;
 }
+.action-btns{
+  padding-top: 22px;
+}
+.dropdown-menu > li > a.list-my-posts,
+.dropdown-menu > li > a.list-my-posts i{
+  color: $title-color;
+}
+.list-my-posts i{
+  font-size: 20px;
+  position: relative;
+  top:3px;
+  margin-right: 5px;
+}
+
+table > thead > tr > th{
+  background-color: $title-color;
+  color: #ffffff;
+}
+
+.list-group-item .checkbox{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
