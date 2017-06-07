@@ -21,6 +21,7 @@
                     <tr>
                         <th>Nome</th>
                         <th>E-mail</th>
+                        <th>Papéis</th>
                         <th class="text-center">Ações</th>
                     </tr>
                 </thead>
@@ -29,6 +30,13 @@
                         <tr>
                             <td>{{ $user->name }}</td>
                             <td><span class="text-primary">{{ $user->email }}</span></td>
+                            <td>
+                                @forelse( $user->roles as $role )
+                                    <span class="badge">{{ $role->name }}</span>
+                                @empty
+                                    <span class="badge">Nenhum papel vinculado</span>
+                                @endforelse
+                            </td>
                             <td class="text-center"><a href="{{ Route('deleteUser', ['id' => $user->id]) }}" class="btn btn-xs btn-danger">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                 </a></td>

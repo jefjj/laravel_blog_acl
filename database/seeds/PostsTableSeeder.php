@@ -18,7 +18,7 @@ class PostsTableSeeder extends Seeder
             DB::table('posts')->insert([
                 'title' => $faker->unique()->sentence(),
                 'content' => $faker->text(1000),
-                'user_id' => App\User::where(['email' => 'jj.jeferson@gmail.com'])->first()->id
+                'user_id' => 1
             ]);
 
             $qtd--;

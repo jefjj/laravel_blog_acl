@@ -59,6 +59,12 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li>
+                                    <!-- Button trigger modal -->
+                                    <a href="javascript:void(0);" data-toggle="modal" data-target="#myModal">
+                                        Alterar senha
+                                    </a>
+                                </li>
+                                <li>
                                     <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -80,6 +86,51 @@
 
     @yield('content')
 </div>
+
+<!-- Modal -->
+<form role="form" method="POST"  action="{{ route('changePassword') }}">
+    {{ csrf_field() }}
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Alterar senha</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                        <label for="password" class="col-md-4 control-label">Nova senha</label>
+
+                        <div class="col-md-6">
+                            <input id="password" type="password" class="form-control" name="password" required>
+
+                            @if ($errors->has('password'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label for="password-confirm" class="col-md-4 control-label">Confirme a nova senha</label>
+
+                        <div class="col-md-6">
+                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>

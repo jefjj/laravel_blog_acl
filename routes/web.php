@@ -11,13 +11,10 @@
 |
 */
 
-Auth::routes();
-
 Route::get('/', 'PostsController@index')->name('posts');
 
-/*Route::middleware('auth:api')->get('/post/{id?}', 'PostsController@post')->name('post')->defaults('id', 0)->where('id', '[0-9]+');
-Route::get('/posts/delete/{id}', 'PostsController@deletePost')->name('deletePost')->where('id', '[0-9]+');
-Route::post('/posts/save', 'PostsController@savePost')->name('savePost');*/
+Auth::routes();
+Route::post('admin/password/change', 'Auth\ChangePasswordController@change')->name('changePassword');
 
 Route::group([
     'middleware' => 'auth',

@@ -4,6 +4,14 @@ use Illuminate\Database\Seeder;
 
 class RolesTableSeeder extends Seeder
 {
+    private $_permissions = [
+        [1, 2, 3, 4, 5],
+        [1, 2, 3, 4, 5],
+        [4, 5],
+        [1, 3, 4, 5],
+        [5],
+    ];
+
     /**
      * Run the database seeds.
      *
@@ -30,5 +38,12 @@ class RolesTableSeeder extends Seeder
         DB::table('roles')->insert([
             'name' => 'Guest',
         ]);
+
+        //many to many pivot table
+        for ($i = 0; $i < 5; $i++)
+        {
+            $role = App\Role::find($i + 1);
+            $role->permissions()->attach($this->_permissions[$i]);
+        }
     }
 }

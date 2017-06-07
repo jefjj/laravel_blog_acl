@@ -33,10 +33,11 @@ class RolesController extends Controller
 
     public function saveRole(StoreBlogRole $request)
     {
-        dd($request->input('permissions'));
-        $role = new Role;
-        $role->name = $request->input('name');
-        $role->save();
+        $role = Role::create([
+            'name' => $request->input('name'),
+        ]);
+
+        $role->permissions()->attach($request->input('permissions'));
 
         //Message success
         $request->session()->flash('message', '<strong>Tudo ok!</strong> Papel salvo com sucesso.');

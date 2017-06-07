@@ -24,7 +24,7 @@ class StoreBlogPermission extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:roles|max:30',
+            'name' => 'required|unique:permissions|max:30',
         ];
     }
 }

@@ -30,9 +30,9 @@ class PermissionsController extends Controller
 
     public function savePermission(StoreBlogPermission $request)
     {
-        $permission = new Permission;
-        $permission->name = $request->input('name');
-        $permission->save();
+        $permission = Permission::create([
+            'name' => $request->input('name'),
+        ]);
 
         //Message success
         $request->session()->flash('message', '<strong>Tudo ok!</strong> Permissão salva com sucesso.');

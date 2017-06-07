@@ -15,6 +15,15 @@
                 {!!  Session('message') !!}
             </div>
         @endif
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="row">
             <div class="col-sm-4">
                 <div class="well">
@@ -57,6 +66,7 @@
                         <thead>
                         <tr>
                             <th>Papel</th>
+                            <th>Permissões</th>
                             <th class="text-center">Ações</th>
                         </tr>
                         </thead>
@@ -64,6 +74,13 @@
                         @foreach( $roles as $role )
                             <tr>
                                 <td>{{ $role->name }}</td>
+                                <td>
+                                    @forelse( $role->permissions as $permission )
+                                        <span class="badge">{{ $permission->name }}</span>
+                                    @empty
+                                        <span class="badge">Sem permissões</span>
+                                    @endforelse
+                                </td>
                                 <td class="text-center"><a href="{{ Route('deleteRole', ['id' => $role->id]) }}"
                                                            class="btn btn-xs btn-danger">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
