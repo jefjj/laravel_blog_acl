@@ -31,4 +31,44 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Role');
     }
+
+    public function isAdmin()
+    {
+        foreach ($this->roles as $r)
+        {
+            if($r->name === 'Admin')
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function canDelete()
+    {
+        foreach ($this->roles as $r)
+        {
+            if($r->name === 'Manager' || $r->name === 'Moderator')
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function hasPermission($permission)
+    {
+        foreach ($this->roles as $r)
+        {
+            foreach ($r->permissions as $p)
+            {
+                if($p->name === $permission)
+                    return true;
+            }
+        }
+
+        return false;
+    }
 }

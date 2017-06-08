@@ -49,7 +49,7 @@
             <h2>{{ $post->title }}</h2>
             <p>{{ $post->content }}</p>
             <p class="text-muted"><b>Autor: {{ $post->user->name }}</b></p>
-            @can('manipulate', $post)
+            @if( Auth::user() )
                 <div>
                     @can('update', $post)
                         <a href="{{ Route('updatePost', ['id' => $post->id]) }}" class="btn btn-sm btn-warning">
@@ -62,7 +62,7 @@
                                     aria-hidden="true"></i> Excluir</a>
                     @endcan
                 </div>
-            @endcan
+            @endif
             <hr>
         @empty
             <div class="well">Nenhum post encontrado!</div>

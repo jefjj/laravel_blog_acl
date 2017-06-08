@@ -25,11 +25,15 @@ class UsersTableSeeder extends Seeder
         //creates 10 users
         factory(App\User::class, 10)->create()->each(function ($u) {
 
+            //set password
+            $u->password = bcrypt('123456');
+            $u->save();
             //set role to the current user
-            $u->roles()->attach(rand(1,5));
+            $u->roles()->attach(rand(2,5));
 
             //this creates 1 post to the current user
-            factory(App\Post::class)->create(['user_id' => $u->id]);
+            if($u->hasPermission('create'))
+                factory(App\Post::class)->create(['user_id' => $u->id]);
 
         });
     }

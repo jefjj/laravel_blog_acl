@@ -5,11 +5,11 @@ use Illuminate\Database\Seeder;
 class RolesTableSeeder extends Seeder
 {
     private $_permissions = [
-        [1, 2, 3, 4, 5],
-        [1, 2, 3, 4, 5],
-        [4, 5],
-        [1, 3, 4, 5],
-        [5],
+        [1, 2, 3, 4],
+        [1, 2, 3, 4],
+        [2, 4],
+        [1, 2, 3, 4],
+        [2],
     ];
 
     /**

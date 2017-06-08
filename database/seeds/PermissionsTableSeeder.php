@@ -16,7 +16,7 @@ class PermissionsTableSeeder extends Seeder
         ]);
 
         DB::table('permissions')->insert([
-            'name' => 'replace',
+            'name' => 'read',
         ]);
 
         DB::table('permissions')->insert([
@@ -25,10 +25,6 @@ class PermissionsTableSeeder extends Seeder
 
         DB::table('permissions')->insert([
             'name' => 'delete',
-        ]);
-
-        DB::table('permissions')->insert([
-            'name' => 'view',
         ]);
     }
 }

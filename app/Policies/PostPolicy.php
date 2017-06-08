@@ -19,7 +19,10 @@ class PostPolicy
      */
     public function view(User $user, Post $post)
     {
-        //
+        if($user->isAdmin())
+            return true;
+
+        return $user->hasPermission('read');
     }
 
     /**
@@ -30,7 +33,10 @@ class PostPolicy
      */
     public function create(User $user)
     {
-        return isset($user);
+        if($user->isAdmin())
+            return true;
+
+        return $user->hasPermission('create');
     }
 
     /**
@@ -42,7 +48,11 @@ class PostPolicy
      */
     public function update(User $user, Post $post)
     {
-        return $user->id === $post->user_id;
+        if($user->isAdmin())
+            return true;
+
+        return ($user->hasPermission('update') &&
+            $user->id === $post->user_id);
     }
 
     /**
@@ -54,20 +64,11 @@ class PostPolicy
      */
     public function delete(User $user, Post $post)
     {
-        return $user->id === $post->user_id;
-    }
+        if($user->isAdmin() || $user->canDelete())
+            return true;
 
-    /**
-     * Determine whether the user can manipulate the post.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Post  $post
-     * @return mixed
-     */
-    public function manipulate(User $user)
-    {
-        return isset($user);
+        return ($user->hasPermission('delete') &&
+            $user->id === $post->user_id);
     }
-
 
 }
