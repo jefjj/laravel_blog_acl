@@ -52,3 +52,31 @@ Route::group([
     Route::get('/delete/{id}', 'PermissionsController@deletePermission')->name('deletePermission')->where('id', '[0-9]+');
     Route::post('/save', 'PermissionsController@savePermission')->name('savePermission');
 });
+
+Route::post('/image', 'ImagesController@save')->name('imageUpload');
+Route::get('/image', 'ImagesController@index')->name('image');
+/* Route::get('/image', function()
+{
+    $url = url('/img/tec.jpg');
+    $nome = uniqid('img_');
+    $destinationPathG = public_path('img/' . $nome . '.jpg');
+    $destinationPath = public_path('img/thumbnails/' . $nome . '.jpg');
+    //dd($url);
+    $imgOri = Intervention\Image\Facades\Image::make(url('/img/summer_ori.jpg'));
+
+    $width = $imgOri->width();
+    $height = $imgOri->height();
+
+    if($width != $height) 
+    {
+        $adjustSize = ($width > $height ? [0, $width - $height] : [$width - $height, 0]); 
+        $img = Intervention\Image\Facades\Image::make(url('/img/summer_ori.jpg'))->resizeCanvas($adjustSize[0], $adjustSize[1], 'center', true, '#ffffff');
+    }
+
+    $img->fit(500);
+    $img->save($destinationPathG, 100);
+    $img->fit(200);
+    $img->save($destinationPath, 100);
+
+    return $img->response('jpg');
+}); */
