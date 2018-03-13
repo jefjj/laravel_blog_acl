@@ -21,6 +21,11 @@
                               <input type="file" id="photo" name="photo">
                               <p class="help-block">Selecione uma imagem para upload.</p>
                             </div>
+                            <div class="checkbox">
+                                <label>
+                                  <input type="checkbox" id="permitirEsticar" name="permitirEsticar"> Permitir esticar a imagem
+                                </label>
+                              </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Enviar</button>
                             </div>
@@ -30,7 +35,7 @@
             </div>
             <div class="col-sm-8">
                 @if ( isset($img) )
-                  <img src="{{ $img }}" alt="Imagem recebida por upload">
+                  <div class="well"><img src="{{ $img }}" class="center-block image-responsive" alt="Imagem recebida por upload"></div>
                 @else
                   <div class="well">Nenhuma upload realizado!</div>
                 @endif

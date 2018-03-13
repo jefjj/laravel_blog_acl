@@ -31,20 +31,29 @@ class ImagesController extends Controller
         $nome = uniqid('img_');
         $destinationPathG = public_path('img/' . $nome . '.jpg');
         $destinationPath = public_path('img/thumbnails/' . $nome . '.jpg');
-        $imgOri = Image::make($file);
 
-        //$data = getimagesize($file);
-        //$width = $data[0];
-        //$height = $data[1];
-
-
-        $width = $imgOri->width();
-        $height = $imgOri->height();
+        $data = getimagesize($file);
+        $width = $data[0];
+        $height = $data[1];
 
         if($width != $height) 
         {
-            $adjustSize = ($width > $height ? [0, $width - $height] : [$width - $height, 0]); 
+            if($width < 500 && $height < 500 && !$request->input('permitirEsticar'))
+            {
+                $adjustSize = [
+                    (500 - $width),
+                    (500 - $height),
+                ];
+            }
+            else{
+                $adjustSize = ($width > $height ? [0, $width - $height] : [$width - $height, 0]);
+            }
+
             $img = Image::make($file)->resizeCanvas($adjustSize[0], $adjustSize[1], 'center', true, '#ffffff');
+        }
+        else
+        {
+            $img = Image::make($file);            
         }
 
         $img->fit(500);
@@ -54,7 +63,6 @@ class ImagesController extends Controller
 
         $request->session()->flash('img', url('/img/' . $nome . '.jpg'));
 
-        //return $img->response('jpg');
         return redirect()->route('image');
     }
 }
