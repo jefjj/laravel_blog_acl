@@ -37,3 +37,11 @@ table > thead > tr > th{
   margin-top: 0px;
   margin-bottom: 0px;
 }
+
+.preview-box{
+  max-height: 400px;
+}
+
+.preview-box > img{
+  visibility: hidden;
+}

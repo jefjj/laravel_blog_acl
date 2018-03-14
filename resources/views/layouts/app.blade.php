@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{ asset('css/all.css') }}" rel="stylesheet">
 </head>
 <body>
 <div id="app">
@@ -42,6 +43,7 @@
                     <li><a href="{{ route('users') }}">Usuários</a></li>
                     <li><a href="{{ route('roles') }}">Papéis</a></li>
                     <li><a href="{{ route('permissions') }}">Permissões</a></li>
+                    <li><a href="{{ route('image') }}">Image Crop</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -134,6 +136,7 @@
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/all.js') }}"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('.list-my-posts').click(function (e) {

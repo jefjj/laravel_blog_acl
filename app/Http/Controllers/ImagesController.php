@@ -24,7 +24,7 @@ class ImagesController extends Controller
         }
         else
         {
-            dd('Ferro');
+            //dd('Ferro');
             return redirect()->route('image');
         }
 
@@ -32,11 +32,13 @@ class ImagesController extends Controller
         $destinationPathG = public_path('img/' . $nome . '.jpg');
         $destinationPath = public_path('img/thumbnails/' . $nome . '.jpg');
 
-        $data = getimagesize($file);
-        $width = $data[0];
-        $height = $data[1];
+        $img = Image::make($file);
+        $img->crop(floor($request->input('photo-width')), floor($request->input('photo-height')), floor($request->input('photo-x')), floor($request->input('photo-y')));
+        
+        $width = $img->width();
+        $height = $img->height();
 
-        if($width != $height) 
+        if($width == $height) // square images
         {
             if($width < 500 && $height < 500 && !$request->input('permitirEsticar'))
             {
@@ -46,15 +48,32 @@ class ImagesController extends Controller
                 ];
             }
             else{
-                $adjustSize = ($width > $height ? [0, $width - $height] : [$width - $height, 0]);
+                $adjustSize = [0, 0];
             }
 
-            $img = Image::make($file)->resizeCanvas($adjustSize[0], $adjustSize[1], 'center', true, '#ffffff');
+           // $img->resizeCanvas($adjustSize[0], $adjustSize[1], 'center', true, '#ffffff');
         }
-        else
+        else // wide images
         {
-            $img = Image::make($file);            
+            $adjustSize = ($width > $height ? [0, $width - $height] : [$width - $height, 0]);            
         }
+
+        // less than 500px
+        if($width < 500 && $height < 500 && !$request->input('permitirEsticar'))
+        {
+            $adjustSize = [
+                (500 - $width),
+                (500 - $height),
+            ];
+
+            $adjustSize[0] = $adjustSize[0] > 0 ? $adjustSize[0] : 0;
+            $adjustSize[1] = $adjustSize[1] > 0 ? $adjustSize[1] : 0;
+        }
+        else{
+        }
+        
+        // resize to square
+        $img->resizeCanvas($adjustSize[0], $adjustSize[1], 'center', true, '#ffffff');
 
         $img->fit(500);
         $img->save($destinationPathG, 100);
