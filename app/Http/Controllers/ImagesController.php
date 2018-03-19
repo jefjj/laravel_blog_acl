@@ -24,7 +24,6 @@ class ImagesController extends Controller
         }
         else
         {
-            //dd('Ferro');
             return redirect()->route('image');
         }
 
@@ -38,26 +37,6 @@ class ImagesController extends Controller
         $width = $img->width();
         $height = $img->height();
 
-        if($width == $height) // square images
-        {
-            if($width < 500 && $height < 500 && !$request->input('permitirEsticar'))
-            {
-                $adjustSize = [
-                    (500 - $width),
-                    (500 - $height),
-                ];
-            }
-            else{
-                $adjustSize = [0, 0];
-            }
-
-           // $img->resizeCanvas($adjustSize[0], $adjustSize[1], 'center', true, '#ffffff');
-        }
-        else // wide images
-        {
-            $adjustSize = ($width > $height ? [0, $width - $height] : [$width - $height, 0]);            
-        }
-
         // less than 500px
         if($width < 500 && $height < 500 && !$request->input('permitirEsticar'))
         {
@@ -65,15 +44,20 @@ class ImagesController extends Controller
                 (500 - $width),
                 (500 - $height),
             ];
-
-            $adjustSize[0] = $adjustSize[0] > 0 ? $adjustSize[0] : 0;
-            $adjustSize[1] = $adjustSize[1] > 0 ? $adjustSize[1] : 0;
+        }
+        else if($width < 500 && $height < 500 && $request->input('permitirEsticar'))
+        {
+            $adjustSize = ($width >= $height ? [0, (500 - $width - $height)] : [(500 - $height - $width), 0]);
         }
         else{
+            $adjustSize = ($width >= $height ? [0, $width - $height] : [$height - $width, 0]);
         }
         
-        // resize to square
-        $img->resizeCanvas($adjustSize[0], $adjustSize[1], 'center', true, '#ffffff');
+        // resize to square if needed
+        if($width != $height || ($width < 500 && $height < 500))
+        {
+            $img->resizeCanvas($adjustSize[0], $adjustSize[1], 'center', true, '#ffffff');
+        }
 
         $img->fit(500);
         $img->save($destinationPathG, 100);
