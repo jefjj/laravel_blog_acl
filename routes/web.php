@@ -55,3 +55,6 @@ Route::group([
 
 Route::post('/image', 'ImagesController@save')->name('imageUpload');
 Route::get('/image', 'ImagesController@index')->name('image');
+
+Route::post('/doc', 'DocsController@save')->name('docPost');
+Route::get('/doc', 'DocsController@index')->name('docGet');

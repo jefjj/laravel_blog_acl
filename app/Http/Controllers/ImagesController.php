@@ -11,7 +11,7 @@ class ImagesController extends Controller
     {
         $img = $request->session()->get('img');
 
-        return view('imageUpload')->with([
+        return view('images.imageUpload')->with([
             'img' => $img,
         ]);
     }

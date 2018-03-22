@@ -44,6 +44,7 @@
                     <li><a href="{{ route('roles') }}">Papéis</a></li>
                     <li><a href="{{ route('permissions') }}">Permissões</a></li>
                     <li><a href="{{ route('image') }}">Image Crop</a></li>
+                    <li><a href="{{ route('docGet') }}">Office Word</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
