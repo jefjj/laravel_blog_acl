@@ -1,4 +1,6 @@
-@extends('layouts.app') @section('content')
+@extends('layouts.app')
+
+@section('content')
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
@@ -36,7 +38,7 @@
                             </label>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Enviar</button>
+                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-upload" aria-hidden="true"></i> Enviar</button>
                         </div>
                     </fieldset>
                 </form>

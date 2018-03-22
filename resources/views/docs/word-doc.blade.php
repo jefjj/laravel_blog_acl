@@ -33,7 +33,7 @@
                             <input type="number" name="cols" id="cols" class="form-control" value="1" required></textarea>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Enviar</button>
+                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-save" aria-hidden="true"></i> Salvar</button>
                         </div>
                     </fieldset>
                 </form>

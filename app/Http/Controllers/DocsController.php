@@ -14,7 +14,7 @@ class DocsController extends Controller
         $doc = $request->session()->get('doc');
 
         return view('docs.word-doc')->with([
-            'info' => 'Office Word Document PHP Lib',
+            'info' => 'Preencha os campos para gerar um documento',
             'doc' => $doc,
         ]);
     }
