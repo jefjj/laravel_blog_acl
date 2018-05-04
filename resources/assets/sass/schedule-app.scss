@@ -1,0 +1,41 @@
+.schedule-app {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-top: 100px;
+  background-color: #ffffff;
+  z-index: 1030;
+  
+  .schedule-app-header {
+    height: 70px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0px;
+    background-color: #ffffff;
+    z-index: 1040;  
+  }
+
+  .schedule-form-select {
+    color: #aaaaaa;
+  } 
+
+  .schedule-form-select.schedule-form-select-selected {
+    color: #555555;
+  }
+
+  .schedule-form-select:focus,
+  .schedule-form-select:active {
+    color: #555555;
+  }
+
+  .alert {
+    display: none;
+  }
+}

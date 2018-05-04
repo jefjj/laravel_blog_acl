@@ -4,5 +4,6 @@
   "/js/jquery.min.js": "/js/jquery.min.js",
   "/mix.js": "/mix.js",
   "/js/all.js": "/js/all.js",
-  "/css/all.css": "/css/all.css"
+  "/css/all.css": "/css/all.css",
+  "/css/schedule-app.css": "/css/schedule-app.css"
 }

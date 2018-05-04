@@ -58,3 +58,9 @@ Route::get('/image', 'ImagesController@index')->name('image');
 
 Route::post('/doc', 'DocsController@save')->name('docPost');
 Route::get('/doc', 'DocsController@index')->name('docGet');
+
+Route::get('/agendamento', function() {
+    return view('scheduling.index');
+})->name('scheduling');
+Route::post('/agendamento', 'SchedulingController@save')->name('saveScheduling');
+
