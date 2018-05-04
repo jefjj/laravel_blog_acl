@@ -18,6 +18,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
     'node_modules/cropperjs/dist/cropper.js',
     'node_modules/jquery-cropper/dist/jquery-cropper.js',
     'node_modules/jquery-mask-plugin/dist/jquery.mask.js',
+    'resources/assets/js/schedule-app.js',
     'resources/assets/js/all.js'
   ], 'public/js/all.js')
   .styles([

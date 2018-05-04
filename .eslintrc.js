@@ -11,7 +11,8 @@ module.exports = {
     "rules": {
         "indent": [
             "error",
-            2
+            2,
+            {"SwitchCase": 1} 
         ],
         "linebreak-style": [
             "error",
@@ -24,7 +25,9 @@ module.exports = {
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "no-multiple-empty-lines": 2,
+        "eol-last": 2
     },
     "globals": {
       "$": true,
