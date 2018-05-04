@@ -18,7 +18,7 @@
     "jquery-cropper": "^1.0.0",
     "jquery-mask-plugin": "^1.14.15",
     "laravel-mix": "0.*",
-    "lodash": "^4.17.10",
-    "vue": "^2.1.10"
-  }
+    "lodash": "^4.17.10"
+  },
+  "dependencies": {}
 }

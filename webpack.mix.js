@@ -1,4 +1,6 @@
-const { mix } = require('laravel-mix');
+const {
+  mix
+} = require('laravel-mix');
 
 /*
  |--------------------------------------------------------------------------
@@ -12,17 +14,17 @@ const { mix } = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
-    .scripts([
-        'node_modules/cropperjs/dist/cropper.js',
-        'node_modules/jquery-cropper/dist/jquery-cropper.js',
-        'node_modules/jquery-mask-plugin/dist/jquery.mask.js',
-        'resources/assets/js/all.js'
-    ], 'public/js/all.js')
-    .styles([
-        'node_modules/cropperjs/dist/cropper.css'
-    ], 'public/css/all.css')
-    .sass('resources/assets/sass/app.scss', 'public/css')
-    .sass('resources/assets/sass/schedule-app.scss', 'public/css')
-    .browserSync({
-        proxy: '127.0.0.1:9000' //PHP server
-    });
+  .scripts([
+    'node_modules/cropperjs/dist/cropper.js',
+    'node_modules/jquery-cropper/dist/jquery-cropper.js',
+    'node_modules/jquery-mask-plugin/dist/jquery.mask.js',
+    'resources/assets/js/all.js'
+  ], 'public/js/all.js')
+  .styles([
+    'node_modules/cropperjs/dist/cropper.css'
+  ], 'public/css/all.css')
+  .sass('resources/assets/sass/app.scss', 'public/css')
+  .sass('resources/assets/sass/schedule-app.scss', 'public/css')
+  .browserSync({
+    proxy: '127.0.0.1:9000' //PHP server
+  });
