@@ -2,7 +2,7 @@
   // Globals
   var empresa = {
     nome: 'Digip',
-    whatsapp: '5524992783665' // '5524992656180',
+    whatsapp: '5524123456789'
   };
 
   // Adiciona classe para auxiliar o css

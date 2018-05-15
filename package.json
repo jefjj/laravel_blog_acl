@@ -20,5 +20,7 @@
     "laravel-mix": "0.*",
     "lodash": "^4.17.10"
   },
-  "dependencies": {}
+  "dependencies": {
+    "npm": "^6.0.1"
+  }
 }
